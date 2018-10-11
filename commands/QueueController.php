@@ -66,3 +66,4 @@ class QueueController extends Controller
         echo $this->render('message', ['dto' => $dto, 'controller' => $this]);
     }
 }
+
