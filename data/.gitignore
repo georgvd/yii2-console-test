@@ -1,0 +1,3 @@
+*
+!.gitignore
+!database.sqlite3.dist
