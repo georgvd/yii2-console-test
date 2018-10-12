@@ -44,10 +44,12 @@
     "scripts": {
         "post-install-cmd": [
             "php -r \"if (!file_exists('data/database.sqlite3')) copy('data/database.sqlite3.dist', 'data/database.sqlite3');\"",
+            "php -r \"chmod('yii', 0777);\"",
             "\"./yii\" migrate --interactive=0"
         ],
         "post-update-cmd": [
             "php -r \"if (!file_exists('data/database.sqlite3')) copy('data/database.sqlite3.dist', 'data/database.sqlite3');\"",
+            "php -r \"chmod('yii', 0777);\"",
             "\"./yii\" migrate --interactive=0"
         ]
     }
