@@ -1,5 +1,7 @@
 # YII2-console-test
 
+[![Build Status](https://travis-ci.com/georgvd/yii2-console-test.svg?branch=master)](https://travis-ci.com/georgvd/yii2-console-test)
+
 This is just a test project!
 
 ## Requirements
