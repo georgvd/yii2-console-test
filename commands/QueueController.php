@@ -10,6 +10,8 @@ use yii\console\ExitCode;
 
 class QueueController extends Controller
 {
+    const QUEUE_SERVICE_INTERVAL = 5; //in seconds
+
     /** @var QueueService */
     protected $queueService;
 
@@ -20,6 +22,9 @@ class QueueController extends Controller
         $this->queueService = new QueueService(\Yii::$app->queue);
     }
 
+    /**
+     * Add message to queue. Paramenter: text
+     */
     public function actionPush($text)
     {
         try {
@@ -42,6 +47,9 @@ class QueueController extends Controller
         }
     }
 
+    /**
+     * Serve queue continuously with interval of 5 seconds
+     */
     public function actionService()
     {
         echo $this->render(
@@ -49,9 +57,9 @@ class QueueController extends Controller
             ['controller' => $this]
         );
 
-        $this->queueService->manageQueue(
+        $this->queueService->serviceQueue(
             true,
-            5,
+            static::QUEUE_SERVICE_INTERVAL,
             \Closure::fromCallable([$this, 'renderMessage'])
         );
 

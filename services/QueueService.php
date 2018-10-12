@@ -8,6 +8,10 @@ use app\jobs\QueueMessageJob;
 use yii\queue\db\Queue;
 use yii\queue\ExecEvent;
 
+/**
+ * Class QueueService - service layer for yii2-queue management
+ * @package app\services
+ */
 class QueueService
 {
     const MAX_MESSAGE_TEXT_LENGTH = 120;
@@ -25,7 +29,7 @@ class QueueService
 
     /**
      * Parse and validate input text
-     * @param $text
+     * @param string $text
      * @return string
      * @throws QueueServiceException
      */
@@ -43,7 +47,7 @@ class QueueService
     }
 
     /**
-     * @param $text
+     * @param string $text
      * @return QueueMessageDto
      * @throws QueueServiceException
      */
@@ -57,7 +61,12 @@ class QueueService
         return $dto;
     }
 
-    public function manageQueue($isInfinityLoop, $timeout, \Closure $onProcessMessage)
+    /**
+     * @param bool $isInfinityLoop Serve queue continuously
+     * @param int $timeout Timeout between service iterations, in seconds
+     * @param \Closure $onProcessMessage Call this callback when new message found in queue
+     */
+    public function serviceQueue($isInfinityLoop, $timeout, \Closure $onProcessMessage)
     {
         $this->onProcessMessage = $onProcessMessage;
         $this->queue->on(Queue::EVENT_AFTER_EXEC, \Closure::fromCallable([$this, 'onQueueEventAfterExecute']));

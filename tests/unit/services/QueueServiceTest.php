@@ -86,7 +86,7 @@ class QueueServiceTest extends \Codeception\Test\Unit
     /**
      * @dataProvider providerManageQueue
      */
-    public function testManageQueue($isInfinityLoop, $timeout)
+    public function testServiceQueue($isInfinityLoop, $timeout)
     {
         $this->queue
             ->expects($this->once())
@@ -100,7 +100,7 @@ class QueueServiceTest extends \Codeception\Test\Unit
 
         $fn = function(){};
 
-        $this->queueService->manageQueue($isInfinityLoop, $timeout, $fn);
+        $this->queueService->serviceQueue($isInfinityLoop, $timeout, $fn);
 
         $refl = new \ReflectionObject($this->queueService);
 
